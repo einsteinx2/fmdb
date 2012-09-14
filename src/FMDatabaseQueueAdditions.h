@@ -20,6 +20,6 @@
 - (NSDate*)dateForQuery:(NSString*)query, ...;
 
 - (BOOL)tableExists:(NSString*)tableName;
-- (BOOL)columnExists:(NSString*)tableName columnName:(NSString*)columnName;
+- (BOOL)columnExists:(NSString*)columnName inTableWithName:(NSString*)tableName;
 
 @end

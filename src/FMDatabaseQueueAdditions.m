@@ -73,11 +73,11 @@ return ret;
 	return exists;
 }
 
-- (BOOL)columnExists:(NSString*)tableName columnName:(NSString*)columnName
+- (BOOL)columnExists:(NSString*)columnName inTableWithName:(NSString*)tableName
 {
 	__block BOOL exists;
 	[self inDatabase:^(FMDatabase *db) {
-		exists = [db columnExists:tableName columnName:columnName];
+        exists = [db columnExists:columnName inTableWithName:tableName];
 	}];
 	return exists;
 }
