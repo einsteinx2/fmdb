@@ -287,6 +287,7 @@
 				INSTALL_PATH = "$(HOME)/bin";
 				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
 				PRODUCT_NAME = fmdb;
+				SUPPORTED_PLATFORMS = "macosx ios";
 			};
 			name = Debug;
 		};
@@ -307,6 +308,7 @@
 				INSTALL_PATH = "$(HOME)/bin";
 				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
 				PRODUCT_NAME = fmdb;
+				SUPPORTED_PLATFORMS = "macosx ios";
 			};
 			name = Release;
 		};
