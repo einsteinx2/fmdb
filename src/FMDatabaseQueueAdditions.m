@@ -16,17 +16,18 @@
 
 @implementation FMDatabaseQueue (Additions)
 
-#define RETURN_RESULT_FOR_QUERY_WITH_SELECTOR(type, sel)                                                        \
-va_list args;                                                                                                   \
-va_start(args, query);                                                                                          \
-__block type ret;                                                                                               \
-[self inDatabase:^(FMDatabase *db) {                                                                            \
-    FMResultSet *resultSet = [db executeQuery:query withArgumentsInArray:nil orDictionary:nil orVAList:args];   \
-    ret = [resultSet next] ? [resultSet sel:0] : (type)0;                                                       \
-    [resultSet close];                                                                                          \
-    [resultSet setParentDB:nil];                                                                                \
-}];                                                                                                             \
-va_end(args);                                                                                                   \
+#define RETURN_RESULT_FOR_QUERY_WITH_SELECTOR(type, sel)                                                            \
+va_list args;                                                                                                       \
+va_start(args, query);                                                                                              \
+__block va_list *args_ptr = &args;                                                                                  \
+__block type ret;                                                                                                   \
+[self inDatabase:^(FMDatabase *db) {                                                                                \
+    FMResultSet *resultSet = [db executeQuery:query withArgumentsInArray:nil orDictionary:nil orVAList:*args_ptr];  \
+    ret = [resultSet next] ? [resultSet sel:0] : (type)0;                                                           \
+    [resultSet close];                                                                                              \
+    [resultSet setParentDB:nil];                                                                                    \
+}];                                                                                                                 \
+va_end(args);                                                                                                       \
 return ret;
 
 - (NSString*)stringForQuery:(NSString*)query, ...
